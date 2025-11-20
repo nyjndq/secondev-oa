@@ -1,0 +1,65 @@
+# Vue、React build output
+dist/
+build/
+node_modules/
+
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+.flattened-pom.xml
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# Logs
+logs
+*.log
+
+# OS Specific Files
+.DS_Store
+
+# Editor Directories and Files
+.vscode/
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Dependency Directories
+node_modules
+dist-ssr
+
+# Lock Files
+package-lock.json
+yarn.lock
+
+# Local Environment Files
+*.local
+
+
+作者：一颗奇趣蛋
+链接：https://juejin.cn/post/7449325810689458188
+来源：稀土掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
