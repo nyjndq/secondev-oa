@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+weaver-ecode-seconddev-id: com.weaver.seconddev-secondev-demo
+Implementation-Title: secondev-demo
+Implementation-Version: 1.0.0
+Implementation-Vendor-Id: com.weaver.seconddev
+

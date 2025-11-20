@@ -1,0 +1,62 @@
+plugins {
+    id 'java'
+    id 'com.weaver.ecode.gradle.plugin.BuildArchPlugin'
+}
+
+group 'com.weaver.seconddev'
+version '1.0.0'
+description ''
+
+
+allprojects {
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/public/' } // 可以连互联网 可放开此行注释
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
+def ignoredProjectNames = []
+
+
+configure(allprojects) { project ->
+
+    apply plugin: 'java'
+    apply plugin: 'com.weaver.ecode.gradle.plugin.BuildArchPlugin'
+
+    compileJava {
+        options.encoding = 'UTF-8'
+        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    jar {
+        from sourceSets.main.allJava
+        manifest {
+            attributes 'weaver-ecode-seconddev-id': rootProject.group + '-' + rootProject.name,
+                    'Implementation-Version': rootProject.version,
+                    'Implementation-Vendor-Id': rootProject.group,
+                    'Implementation-Title': rootProject.name
+        }
+    }
+
+    if (!ignoredProjectNames.contains(project.name)) {
+        dependencies {
+            // implementation group: 'junit', name: 'junit', version: '4.12'
+            compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
+            annotationProcessor 'org.projectlombok:lombok:1.18.20'
+            // implementation group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+
+            // 添加二开服务拉取的清单依赖
+            def includeType = ['**/*.jar', '**/*.class']
+            //服务器class文件依赖
+            implementation files(rootProject.projectDir.getPath() + '/secDevClasses')
+            //服务器jar包依赖
+            implementation fileTree(dir: rootProject.projectDir.getPath() + '/secDevLib', includes: includeType)
+            // 项目二开自定义依赖
+            implementation fileTree(dir: rootProject.projectDir.getPath() + "/devLib", includes: includeType)
+        }
+    }
+
+}
+

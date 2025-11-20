@@ -1,0 +1,35 @@
+
+// 根项目名
+rootProject.name = 'secondev-demo'
+
+
+def projectNames = []
+def discoverProjects
+discoverProjects = { File directory, String prefix ->
+    directory.eachDir { subDir ->
+        def buildFilePath = new File(subDir.getCanonicalPath(), subDir.name + ".gradle");
+        if (buildFilePath.exists()) {
+            def projectPath = buildFilePath.getParentFile().getCanonicalPath();
+            // 判断是否要添加关联引用 根据模块下是否有.disabled文件
+            if (new File(projectPath + File.separator + ".disabled").exists()) {
+                return;
+            }
+            projectNames.add(projectPath)
+        } else if (subDir.isDirectory()) {
+            discoverProjects(new File(subDir.getPath()), prefix + subDir.name + ":")
+        }
+    }
+}
+
+discoverProjects(rootProject.projectDir, "")
+println('root dir: ' + rootDir)
+projectNames.forEach { projectName ->
+    def proj = new File((String) projectName)
+    // 计算相对路径
+    def rel_path = proj.getCanonicalPath().replace(rootDir.toString() + File.separator, "")
+    def include_path = rel_path.replace(File.separator, ":");
+    println("include: ${rel_path}, ref: ${include_path}")
+
+    include include_path
+    project(":${include_path}").buildFileName = proj.getName() + ".gradle"
+}

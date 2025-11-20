@@ -1,0 +1,2 @@
+com/weaver/ecode/gradle/plugin/BuildArchPlugin.java
+ com.weaver.ecode.gradle.plugin.BuildArchPlugin

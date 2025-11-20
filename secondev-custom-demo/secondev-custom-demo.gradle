@@ -1,0 +1,9 @@
+plugins{
+    id 'java'
+}
+description = ""
+
+dependencies {
+    // 子项目私有依赖添加
+
+}
