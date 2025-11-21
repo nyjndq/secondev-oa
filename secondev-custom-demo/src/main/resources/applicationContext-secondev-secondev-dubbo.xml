@@ -5,4 +5,8 @@
                    interface="com.weaver.esb.api.rpc.EsbServerlessRpcRemoteInterface"
                    group="esbDemoActionGroup" />
 
+    <dubbo:service ref="materialShortageAction"
+                   interface="com.weaver.esb.api.rpc.EsbServerlessRpcRemoteInterface"
+                   group="materialShortageActionGroup" />
+
 </beans>
